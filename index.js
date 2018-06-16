@@ -40,6 +40,7 @@ const faqApp = new FaqApp();
 
 faqShell.addCommand({
   command: 'who is the president of <country>',
+  aliases: ['president of <country>', '<country> president'],
   handler: ({variables}) => {
     const {country} = variables;
     const president = faqApp.getPresident(country);

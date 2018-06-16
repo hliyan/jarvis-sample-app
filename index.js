@@ -1,26 +1,29 @@
 const Jarvis = require('jarvis');
+const vorpal = require('vorpal')();
 
-class Presidents {
+class FaqApp {
   constructor() {
-    this.data = [
-      {
-        country: 'USA',
-        president: 'Barack Obama'
-      },
-      {
-        country: 'Russia',
-        president: 'Vladamir Putin'
-      },
-      {
-        country: 'China',
-        president: 'Xi Jing Ping'
-      }
-    ];
+    this.data = {
+      presidents: [
+        {
+          country: 'USA',
+          president: 'Barack Obama'
+        },
+        {
+          country: 'Russia',
+          president: 'Vladamir Putin'
+        },
+        {
+          country: 'China',
+          president: 'Xi Jing Ping'
+        }
+      ]
+    };
   }
 
   getPresident(country) {
     let president = null;
-    this.data.forEach((item) => {
+    this.data.presidents.forEach((item) => {
       if (item.country.match(new RegExp(country, 'i')))
         president = item.president;
     });
@@ -28,13 +31,13 @@ class Presidents {
   }
 }
 
-const jarvis = new Jarvis();
-const presidents = new Presidents();
+const faqShell = new Jarvis();
+const presidents = new FaqApp();
 
-jarvis.addCommand({
+faqShell.addCommand({
   command: 'who is the president of',
-  handler: (context, data) => {
-    const words = data.match(/\b(\w+)\b/g);
+  handler: (context, args) => {
+    const words = args.match(/\b(\w+)\b/g);
     const country = words[5];
     const president = presidents.getPresident(country);
     return president 
@@ -43,10 +46,17 @@ jarvis.addCommand({
   }
 });
 
-const run = async () => {
-  let foo = await jarvis.send('who is the president of china?');
-  console.log(foo);
-};
+vorpal
+  .mode('faq')
+  .delimiter('faq>')
+  .action(async function(args, callback) {
+    let answer = await faqShell.send(args);
+    vorpal.log(answer ? answer : 'I do not understand');
+    callback();
+  });
 
-run();
+vorpal
+  .delimiter('jarvis>')
+  .show();
 
+  

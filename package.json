@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/hliyan/jarvis-sample-app#readme",
   "dependencies": {
-    "jarvis": "github:hliyan/jarvis"
+    "jarvis": "github:hliyan/jarvis",
+    "vorpal": "^1.12.0"
   }
 }

@@ -32,14 +32,14 @@ class FaqApp {
 }
 
 const faqShell = new Jarvis();
-const faqShell = new FaqApp();
+const faqApp = new FaqApp();
 
 faqShell.addCommand({
   command: 'who is the president of',
   handler: (context, args) => {
     const words = args.match(/\b(\w+)\b/g);
     const country = words[5];
-    const president = faqShell.getPresident(country);
+    const president = faqApp.getPresident(country);
     return president 
       ? `the president of ${country} is ${president}`
       : `i don't know who the president of ${country} is`;
@@ -48,6 +48,7 @@ faqShell.addCommand({
 
 vorpal
   .mode('faq')
+  .description('Enter FAQ mode')
   .delimiter('faq>')
   .action(async function(args, callback) {
     let answer = await faqShell.send(args);
@@ -58,5 +59,6 @@ vorpal
 vorpal
   .delimiter('jarvis>')
   .show();
+vorpal.exec('faq');
 
   

@@ -16,6 +16,10 @@ class FaqApp {
         {
           country: 'China',
           president: 'Xi Jing Ping'
+        },
+        {
+          country: 'Sri Lanka',
+          president: 'Maithreepala Sirisena'
         }
       ]
     };
@@ -24,7 +28,7 @@ class FaqApp {
   getPresident(country) {
     let president = null;
     this.data.presidents.forEach((item) => {
-      if (item.country.match(new RegExp(country, 'i')))
+      if (item.country.match(new RegExp(`^${country}$`, 'i')))
         president = item.president;
     });
     return president;
@@ -36,9 +40,9 @@ const faqApp = new FaqApp();
 
 faqShell.addCommand({
   command: 'who is the president of',
-  handler: (context, args) => {
-    const words = args.match(/\b(\w+)\b/g);
-    const country = words[5];
+  handler: ({context, data}) => {
+    const words = data.match(/\w+|"[^"]+"/g);
+    const country = words[5].replace(/"/g, '');
     const president = faqApp.getPresident(country);
     return president 
       ? `the president of ${country} is ${president}`

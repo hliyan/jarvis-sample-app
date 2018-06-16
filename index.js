@@ -32,14 +32,14 @@ class FaqApp {
 }
 
 const faqShell = new Jarvis();
-const presidents = new FaqApp();
+const faqShell = new FaqApp();
 
 faqShell.addCommand({
   command: 'who is the president of',
   handler: (context, args) => {
     const words = args.match(/\b(\w+)\b/g);
     const country = words[5];
-    const president = presidents.getPresident(country);
+    const president = faqShell.getPresident(country);
     return president 
       ? `the president of ${country} is ${president}`
       : `i don't know who the president of ${country} is`;

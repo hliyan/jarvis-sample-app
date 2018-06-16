@@ -1,0 +1,22 @@
+{
+  "name": "jarvis-sample-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hliyan/jarvis-sample-app.git"
+  },
+  "author": "Hasitha N. Liyanage",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hliyan/jarvis-sample-app/issues"
+  },
+  "homepage": "https://github.com/hliyan/jarvis-sample-app#readme",
+  "dependencies": {
+    "jarvis": "github:hliyan/jarvis"
+  }
+}

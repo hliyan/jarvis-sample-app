@@ -40,9 +40,9 @@ const faqApp = new FaqApp();
 
 faqShell.addCommand({
   command: 'who is the president of',
-  handler: ({context, data}) => {
-    const words = data.match(/\w+|"[^"]+"/g);
-    const country = words[5].replace(/"/g, '');
+  handler: ({context, line, args}) => {
+    console.log(args);
+    const country = args[5];
     const president = faqApp.getPresident(country);
     return president 
       ? `the president of ${country} is ${president}`

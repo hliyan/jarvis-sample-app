@@ -39,14 +39,17 @@ const faqShell = new Jarvis();
 const faqApp = new FaqApp();
 
 faqShell.addCommand({
-  command: 'who is the president of <country>',
-  aliases: ['president of <country>', '<country> president'],
-  handler: ({variables}) => {
-    const {country} = variables;
+  command: 'getCountryPresident <country>',
+  aliases: [
+    'who is the president of <country>',
+    'president of <country>', 
+    '<country> president'
+  ],
+  handler: ({args: {country}}) => {
     const president = faqApp.getPresident(country);
     return president 
       ? `the president of ${country} is ${president}`
-      : `i don't know who the president of ${country} is`;
+      : `i don't know ${country}`;
   }
 });
 
